@@ -34,5 +34,8 @@
   "homepage": "https://github.com/buttercomponents/butter-component-list#readme",
   "devDependencies": {
     "butter-component-builder": "buttercomponents/butter-component-builder"
+  },
+  "dependencies": {
+    "butter-base-components": "buttercomponents/butter-base-components"
   }
 }
