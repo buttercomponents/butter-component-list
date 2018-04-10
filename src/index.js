@@ -5,10 +5,11 @@ import style from './styl/style.styl';
 
 let Item = ({title, year,  rating, img}) => (
     <div className={style.card}>
-        <div className={`${style.overlay}`}>
-            <img src={img} />
-            <i className={`material-icons ${style.playIcon}`}>play_circle_filled</i>
-            <i className={`material-icons ${style.favIcon}`}>favorite</i>
+        <div className={style.thumb} style={ { backgroundImage: `url(${img})`} }>
+            <div className={`${style.overlay}`}>
+                <i className={`material-icons ${style.playIcon}`}>play_circle_filled</i>
+                <i className={`material-icons ${style.favIcon}`}>favorite</i>
+            </div>
         </div>
         <div className={`${style.itemTitle}`}>{title}</div>
         <Stars rating={rating}/>
