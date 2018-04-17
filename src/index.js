@@ -3,46 +3,29 @@ import {Stars} from 'butter-base-components';
 import PropTypes from 'prop-types';
 import style from './styl/style.styl';
 
-let Item = ({title, year,  rating, img}) => (
+let Item = ({action, item, ...props}) => (
     <div className={style.card}>
-        <div className={style.thumb} style={ { backgroundImage: `url(${img})`} }>
-            <div className={`${style.overlay}`}>
+        <div className={style.thumb} style={ { backgroundImage: `url(${item.cover})`} }>
+            <div className={`${style.overlay}`} onClick={(e) => action(item, e)}>
                 <i className={`material-icons ${style.playIcon}`}>play_circle_filled</i>
                 <i className={`material-icons ${style.favIcon}`}>favorite</i>
             </div>
         </div>
-        <div className={`${style.itemTitle}`}>{title}</div>
-        <Stars rating={rating}/>
-        <div className={`${style.itemYear}`}>{year}</div>
+        <div className={`${style.itemTitle}`}>{item.title}</div>
+        <Stars rating={item.rating}/>
+        <div className={`${style.itemYear}`}>{item.year}</div>
     </div>
 )
 
-class List extends Component {
-    render() {
-        let {state, props} = this;
-
-
-        console.error('props', props)
-
-        if (props.items) {
-            return (
-                <div className={`${style.container}`}>
-                    {
-                        props.items.map((e, i) => (
-                            <Item key={i} {...e} />
-                        ))
-                    }
-                </div>
-
-            )
+let List = ({items, ...props}) => (
+    <div className={`${style.container}`}>
+        {
+            items.length ? items.map((item, i) => (
+                <Item key={i} item={item} {...props}/>
+            )) : <div>Empty List</div>
         }
+    </div>
 
-        return (
-            <div>
-                Empty List
-            </div>
-        )
-    }
-}
+)
 
 export default List;
