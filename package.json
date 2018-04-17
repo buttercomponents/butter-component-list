@@ -2,7 +2,7 @@
   "name": "butter-component-list",
   "version": "0.6.0",
   "description": "A base React Component for Butter Project",
-  "main": "dist/bundle.js",
+  "main": "dist/",
   "scripts": {
     "prepublish": "npm run build",
     "install": "PATH=$PATH:../.bin bcb-run install",
