@@ -17,13 +17,17 @@ let Item = ({action, item, ...props}) => (
     </div>
 )
 
-let List = ({items, ...props}) => (
+let List = ({items, isFetching, failed, ...props}) => (
     <div className={`${style.container}`}>
-        {
-            items.length ? items.map((item, i) => (
-                <Item key={i} item={item} {...props}/>
-            )) : <div>Empty List</div>
-        }
+        {[
+             isFetching ? <p>Loading...</p>: null,
+             failed ? <p>`FAILED: ${JSON.stringify(failed, null, 4)}`</p>: null,
+             items.length ? items.map((item, i) => (
+                 <Item key={i} item={item} {...props}/>
+             )) : <div>Empty List</div>
+        ]}
+
+
     </div>
 
 )
