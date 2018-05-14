@@ -3,13 +3,23 @@ import {Stars} from 'butter-base-components';
 import PropTypes from 'prop-types';
 import style from './style.styl';
 
-let Item = ({action, item, ...props}) => (
+const FavouriteButton = ({actions = {}, favourites = {}, id}) => {
+    const active = favourites[id]
+
+    return (
+        <i className={`material-icons ${style.favIcon} ${active ? 'active': ''}`}
+           onClick={() => (console.error('CALLBACK', id, active, actions) || active ? actions.remove(id) : actions.add(id))}>
+            favorite</i>
+    )
+}
+
+const Item = ({actions = {}, persist = {}, item, ...props}) => (
     <div className={style.card}>
         <div className={style.thumb} style={ { backgroundImage: `url(${item.cover})`} }>
-            <div className={`${style.overlay}`} onClick={(e) => action(item, e)}>
+            <div className={`${style.overlay}`} onClick={(e) => actions.show(item, e)}>
                 <i className={`material-icons ${style.playIcon}`}>play_circle_filled</i>
-                <i className={`material-icons ${style.favIcon}`}>favorite</i>
             </div>
+            <FavouriteButton actions={actions.favourites} favourites={persist.favourites} id={item.id}/>
         </div>
         <div className={`${style.itemTitle}`}>{item.title}</div>
         <Stars rating={item.rating}/>
