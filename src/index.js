@@ -22,7 +22,9 @@ const Item = ({actions = {}, persist = {}, item, ...props}) => (
             <FavouriteButton actions={actions.favourites} favourites={persist.favourites} id={item.id}/>
         </div>
         <div className={`${style.itemTitle}`}>{item.title}</div>
-        <Stars rating={item.rating}/>
+        <div className={`${style.stars}`}>
+            <Stars rating={item.rating}/>
+        </div>
         <div className={`${style.itemYear}`}>{item.year}</div>
     </div>
 )
