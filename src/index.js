@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Stars} from 'butter-base-components';
 import PropTypes from 'prop-types';
-import style from './styl/style.styl';
+import style from './style.styl';
 
 let Item = ({action, item, ...props}) => (
     <div className={style.card}>
