@@ -22,10 +22,12 @@ const Item = ({actions = {}, persist = {}, item, ...props}) => (
             <FavouriteButton actions={actions.favourites} favourites={persist.favourites} id={item.id}/>
         </div>
         <div className={`${style.itemTitle}`}>{item.title}</div>
-        <div className={`${style.stars}`}>
-            <Stars rating={item.rating}/>
+        <div className={`${style.hoverContainer}`}>
+            <div className={`${style.stars}`}>
+                <Stars rating={item.rating}/>
+            </div>
+            <div className={`${style.itemYear}`}>{item.year}</div>
         </div>
-        <div className={`${style.itemYear}`}>{item.year}</div>
     </div>
 )
 

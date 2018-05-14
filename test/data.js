@@ -3,12 +3,15 @@ export default {
         url:"https://www.youtube.com/watch?v=Nn7ZPUKn3mI&#038;list=PLmsK4TGRR2BF9V17BwQgXCCn4zO4vQ36_",
         img:"http://midianinja.org/files/2017/09/0.jpg",
         title:"Histórias generosas e subversivas de Jesus Cristo",
-        synopsis:"Henrique Vieira, pastor evangélico, teólogo, militante do PSOL, apresenta em episódios quinzenais um outro lado do cristianismo, a luta pela intolerância religiosa e as histórias generosas e subversivas de Jesus Cristo de Nazaré"},
-            {
-                url:"https://www.youtube.com/watch?v=Q1U0--YzJ8Q&#038;list=PLmsK4TGRR2BEsEKQLwFYf0S21l81M8J_d",
-                img:"http://midianinja.org/files/2017/09/maxresdefault-8.jpg",
-                title:"Putíssima Trindade",
-                synopsis:"Putissima Trindade é o encontro de Indianara Siqueira, Monique Prada e Amara Moira, três puta ativistas, de diferentes partes do Brasil, que debatem o trabalho sexual e os estigmas da profissão."},
+        synopsis:"Henrique Vieira, pastor evangélico, teólogo, militante do PSOL, apresenta em episódios quinzenais um outro lado do cristianismo, a luta pela intolerância religiosa e as histórias generosas e subversivas de Jesus Cristo de Nazaré",
+        year: 2008
+    }, {
+        url:"https://www.youtube.com/watch?v=Q1U0--YzJ8Q&#038;list=PLmsK4TGRR2BEsEKQLwFYf0S21l81M8J_d",
+        img:"http://midianinja.org/files/2017/09/maxresdefault-8.jpg",
+        title:"Putíssima Trindade",
+        synopsis:"Putissima Trindade é o encontro de Indianara Siqueira, Monique Prada e Amara Moira, três puta ativistas, de diferentes partes do Brasil, que debatem o trabalho sexual e os estigmas da profissão.",
+        year: 2007
+    },
             {
                 url:"https://www.youtube.com/watch?v=sxwBbZcEVRc&#038;list=PLmsK4TGRR2BFblyfE3tDgoh2TIMhRUMTl",
                 img:"http://midianinja.org/files/2017/09/maxresdefault-10.jpg",
