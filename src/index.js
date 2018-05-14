@@ -29,7 +29,7 @@ const Item = ({actions = {}, persist = {}, item, ...props}) => (
     </div>
 )
 
-let List = ({items, isFetching, failed, ...props}) => (
+const List = ({items, isFetching, failed, ...props}) => (
     <div className={`${style.container}`}>
         {[
              isFetching ? <p>Loading...</p>: null,
