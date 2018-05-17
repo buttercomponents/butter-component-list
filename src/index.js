@@ -24,7 +24,7 @@ const Item = ({actions = {}, persist = {}, item, ...props}) => (
         <div className={`${style.itemTitle}`}>{item.title}</div>
         <div className={`${style.hoverContainer}`}>
             <div className={`${style.stars}`}>
-                <Stars rating={item.rating}/>
+                <Stars rating={Number(item.rating)}/>
             </div>
             <div className={`${style.itemYear}`}>{item.year}</div>
         </div>
