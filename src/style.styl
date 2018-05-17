@@ -88,9 +88,7 @@
  */
 
 .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
+    overflow: hidden;
     margin: 0;
     height: 100%;
     width: 100%;
@@ -101,15 +99,19 @@
 }
 
 .playIcon {
+    display: table;
+    line-height: 166px;
     color: #FFF;
     font-size: 70px!important;
     z-index: 3;
-    position: absolute;
-    top: calc( 50% - 35px);
-    left: calc( 50% - 35px);
+    margin: auto;
     opacity: 0;
     transition: all .3s ease-in-out;
     text-shadow: 0 0px 8px rgba(0, 0, 0, 0.4);
+}
+
+.playIcon:hover {
+  transform: scale(3);
 }
 
 .favIcon {

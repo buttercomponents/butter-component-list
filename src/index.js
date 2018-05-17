@@ -22,11 +22,18 @@ const FavouriteButton = ({actions = {}, favourites = {}, id}) => {
     )
 }
 
+const PlayButton = ({action}) => (
+    <i onClick={action} className={`material-icons ${style.playIcon}`} >play_circle_filled</i>
+)
+
 const Item = ({actions = {}, persist = {}, item, ...props}) => (
-    <div className={style.card}>
-        <div className={style.thumb} style={ { backgroundImage: `url(${item.cover})`} }>
-            <div className={`${style.overlay}`} onClick={(e) => actions.show(item, e)}>
-                <i className={`material-icons ${style.playIcon}`}>play_circle_filled</i>
+    <div className={style.card} onClick={(e) => actions.show(item, e)}>
+        <div className={style.thumb} style={ { backgroundImage: `url(${item.poster})`} }>
+            <div className={`${style.overlay}`}>
+                <PlayButton action={(e) => {
+                        stopBubbles(e)
+                        actions.play(item)
+                }} />
             </div>
             <FavouriteButton actions={actions.favourites} favourites={persist.favourites} id={item.id}/>
         </div>
