@@ -34,11 +34,11 @@ const Item = ({actions = {}, persist = {}, item, ...props}) => (
 const List = ({items, isFetching, failed, ...props}) => (
     <div className={`${style.container}`}>
         {[
-             isFetching ? <p>Loading...</p>: null,
-             failed ? <p>`FAILED: ${JSON.stringify(failed, null, 4)}`</p>: null,
+             failed ? <p key='list-failed'>`FAILED: ${JSON.stringify(failed, null, 4)}`</p>: null,
              items.length ? items.map((item, i) => (
                  <Item key={i} item={item} {...props}/>
-             )) : <div>Empty List</div>
+             )) : null,
+             isFetching ? <p key='list-loading'>Loading...</p>: null,
         ]}
 
 
