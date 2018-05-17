@@ -3,13 +3,22 @@ import {Stars} from 'butter-base-components';
 import PropTypes from 'prop-types';
 import style from './style.styl';
 
+const stopBubbles = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+}
+
 const FavouriteButton = ({actions = {}, favourites = {}, id}) => {
     const active = favourites[id]
 
     return (
         <i className={`material-icons ${style.favIcon} ${active ? 'active': ''}`}
-           onClick={() => (console.error('CALLBACK', id, active, actions) || active ? actions.remove(id) : actions.add(id))}>
-            favorite</i>
+           onClick={(e) => {
+                   stopBubbles(e)
+                   active ? actions.remove(id) : actions.add(id)
+           }}>
+            favorite
+        </i>
     )
 }
 
