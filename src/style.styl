@@ -130,16 +130,20 @@
     height: 35px;
     background-color: #607D8B;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
-}
 
-.favIcon[class*=active], .favIcon:hover {
-   background: #850000;
-   opacity: 0.8;
-}
+    &:hover {
+      transform: scale(1.5);
+    }
 
-.favIcon[class*=active]:hover {
-    background: #b50000;
-       opacity: 1;
+    &[class*=active], &:hover {
+      background: #850000;
+      opacity: 0.8;
+    }
+
+    &[class*=active]:hover {
+      background: #b50000;
+      opacity: 1;
+    }
 }
 
 .card:hover .itemYear {
