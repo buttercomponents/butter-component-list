@@ -27,12 +27,12 @@ const PlayButton = ({action}) => (
 )
 
 const Item = ({actions = {}, persist = {}, item, ...props}) => (
-    <div className={style.card} onClick={(e) => actions.show(item, e)}>
+    <div className={style.card} onClick={(e) => item.actions.show(item, e)}>
         <div className={style.thumb} style={ { backgroundImage: `url(${item.poster})`} }>
             <div className={`${style.overlay}`}>
                 <PlayButton action={(e) => {
                         stopBubbles(e)
-                        actions.play(item)
+                        item.actions.play(item)
                 }} />
             </div>
             <FavouriteButton actions={actions.favourites} favourites={persist.favourites} id={item.id}/>
