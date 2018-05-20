@@ -62,4 +62,4 @@ const List = ({items, isFetching, failed, ...props}) => (
 
 )
 
-export default List;
+export {List as default, Item}

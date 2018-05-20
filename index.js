@@ -1,3 +1,3 @@
-import List from './src'
+import List, {Item} from './src'
 
-export {List as default}
+export {List as default, Item}
