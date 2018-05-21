@@ -47,18 +47,18 @@ const Item = ({actions = {}, persist = {}, item, ...props}) => (
     </div>
 )
 
-const List = ({items, isFetching, failed, ...props}) => (
-    <div className={`${style.container}`}>
+const List = ({items, isFetching, failed, ...props}) => ([
+    failed ? <p key='list-failed' className={style.failed}>`FAILED: ${JSON.stringify(failed, null, 4)}`</p>: null,
+    <div key='list-main' className={`${style.container}`}>
         {[
-             failed ? <p key='list-failed'>`FAILED: ${JSON.stringify(failed, null, 4)}`</p>: null,
              items.length ? items.map((item, i) => (
                  <Item key={i} item={item} {...props}/>
              )) : null,
              isFetching ? <p key='list-loading'>Loading...</p>: null,
         ]}
-
-
     </div>
+]
+
 
 )
 
