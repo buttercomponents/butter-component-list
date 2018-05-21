@@ -48,7 +48,7 @@ const Item = ({actions = {}, persist = {}, item, ...props}) => (
 )
 
 const List = ({items, isFetching, failed, ...props}) => ([
-    failed ? <p key='list-failed' className={style.failed}>`FAILED: ${JSON.stringify(failed, null, 4)}`</p>: null,
+    (failed && failed.length) ? <p key='list-failed' className={style.failed}>`FAILED: ${JSON.stringify(failed, null, 4)}`</p>: null,
     <div key='list-main' className={`${style.container}`}>
         {[
              items.length ? items.map((item, i) => (
