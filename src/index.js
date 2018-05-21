@@ -27,7 +27,7 @@ const PlayButton = ({action}) => (
 )
 
 const Item = ({actions = {}, persist = {}, item, ...props}) => (
-    <div className={style.card} onClick={(e) => item.actions.show(item, e)}>
+    <div className={style.card} role='list-item' onClick={(e) => item.actions.show(item, e)}>
         <div className={style.thumb} style={ { backgroundImage: `url(${item.poster})`} }>
             <div className={`${style.overlay}`}>
                 <PlayButton action={(e) => {
