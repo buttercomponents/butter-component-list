@@ -26,7 +26,7 @@ const PlayButton = ({action}) => (
     <i onClick={action} className={`material-icons ${style.playIcon}`} >play_circle_filled</i>
 )
 
-const Item = ({actions = {}, persist = {}, item, ...props}) => (
+const Item = ({actions = {}, favourites, item, ...props}) => (
     <div className={style.card} role='list-item' onClick={(e) => actions.show(item)}>
         <div className={style.thumb} style={ { backgroundImage: `url(${item.poster})`} }>
             <div className={`${style.overlay}`}>
@@ -35,7 +35,7 @@ const Item = ({actions = {}, persist = {}, item, ...props}) => (
                         actions.play(item)
                 }} />
             </div>
-            <FavouriteButton actions={actions.favourites} favourites={persist.favourites} id={item.id}/>
+            <FavouriteButton actions={actions.favourites} favourites={favourites} id={item.id}/>
         </div>
         <div className={`${style.itemTitle}`}>{item.title}</div>
         <div className={`${style.hoverContainer}`}>
