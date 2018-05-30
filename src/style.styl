@@ -2,6 +2,14 @@
  * Movie Item
  */
 
+span[class=intersection-visible-wrapper] {
+    position: absolute;
+    left: 0;
+    bottom: 200vh;
+    width: 0px;
+    height: 0px;
+}
+
 .failed {
   padding-top: 10vh;
   padding-bottom: 5vh;
@@ -9,6 +17,7 @@
 }
 
 .container {
+    position: relative;
     display: grid;
     justify-content: space-evenly
     align-items: space-evenly

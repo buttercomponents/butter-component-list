@@ -35,6 +35,7 @@
     "butter-component-builder": "buttercomponents/butter-component-builder"
   },
   "dependencies": {
-    "butter-base-components": "buttercomponents/butter-base-components"
+    "butter-base-components": "buttercomponents/butter-base-components",
+    "react-intersection-visible": "^1.1.0"
   }
 }
