@@ -1,25 +1,29 @@
-import React, { Component } from 'react';
-import {Stars} from 'butter-base-components';
-import PropTypes from 'prop-types';
-import style from './style.styl';
+import React, { Component } from 'react'
+import IntersectionVisible from 'react-intersection-visible'
+
+import {Stars} from 'butter-base-components'
+import PropTypes from 'prop-types'
+import style from './style.styl'
 
 const stopBubbles = (e) => {
-    e.preventDefault()
-    e.stopPropagation()
+  e.preventDefault()
+  e.stopPropagation()
 }
 
 const FavouriteButton = ({actions = {}, favourites = {}, id}) => {
-    const active = favourites[id]
+  const active = favourites[id]
 
-    return (
-        <i className={`material-icons ${style.favIcon} ${active ? 'active': ''}`}
-           onClick={(e) => {
-                   stopBubbles(e)
-                   active ? actions.remove(id) : actions.add(id)
-           }}>
+  return (
+    <i className={`material-icons ${style.favIcon} ${active ? 'active' : ''}`}
+      onClick={(e) => {
+        stopBubbles(e)
+        active ? actions.remove(id) : actions.add(id)
+      }}>
             favorite
-        </i>
-    )
+    </i>
+  )
+}
+
 FavouriteButton.propTypes = {
   actions: PropTypes.object,
   favourites: PropTypes.object,
@@ -27,7 +31,7 @@ FavouriteButton.propTypes = {
 }
 
 const PlayButton = ({action}) => (
-    <i onClick={action} className={`material-icons ${style.playIcon}`} >play_circle_filled</i>
+  <i onClick={action} className={`material-icons ${style.playIcon}`} >play_circle_filled</i>
 )
 
 PlayButton.propTypes = {
@@ -35,24 +39,24 @@ PlayButton.propTypes = {
 }
 
 const Item = ({actions = {}, favourites, item, ...props}) => (
-    <div className={style.card} role='list-item' onClick={(e) => actions.show(item)}>
-        <div className={style.thumb} style={ { backgroundImage: `url(${item.poster})`} }>
-            <div className={`${style.overlay}`}>
-                <PlayButton action={(e) => {
-                        stopBubbles(e)
-                        actions.play(item)
-                }} />
-            </div>
-            <FavouriteButton actions={actions.favourites} favourites={favourites} id={item.id}/>
-        </div>
-        <div className={`${style.itemTitle}`}>{item.title}</div>
-        <div className={`${style.hoverContainer}`}>
-            <div className={`${style.stars}`}>
-                <Stars rating={Number(item.rating)}/>
-            </div>
-            <div className={`${style.itemYear}`}>{item.year}</div>
-        </div>
+  <div className={style.card} role='list-item' onClick={(e) => actions.show(item)}>
+    <div className={style.thumb} style={{backgroundImage: `url(${item.poster})`}}>
+      <div className={`${style.overlay}`}>
+        <PlayButton action={(e) => {
+          stopBubbles(e)
+          actions.play(item)
+        }} />
+      </div>
+      <FavouriteButton actions={actions.favourites} favourites={favourites} id={item.id} />
     </div>
+    <div className={`${style.itemTitle}`}>{item.title}</div>
+    <div className={`${style.hoverContainer}`}>
+      <div className={`${style.stars}`}>
+        <Stars rating={Number(item.rating)} />
+      </div>
+      <div className={`${style.itemYear}`}>{item.year}</div>
+    </div>
+  </div>
 )
 
 Item.propTypes = {
@@ -92,7 +96,29 @@ List.propTypes = {
   failed: PropTypes.bool
 }
 
+class Test extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      items: props.items,
+      iteration: 1
+    }
 
-)
+    this.onStarve = (e) => {
+      this.setState(state => ({
+        iteration: state.iteration + 1,
+        items: state.items.concat(this.props.items.map(item =>
+          Object.assign({}, item, {title: `${state.iteration} - ${item.title}`})))
+      }))
+    }
+  }
 
-export {List as default, Item}
+  render () {
+    const {items} = this.state
+    console.error('render')
+
+    return (<List {...this.props} items={items} onStarve={this.onStarve} />)
+  }
+}
+
+export {Test as default, List, Item}
