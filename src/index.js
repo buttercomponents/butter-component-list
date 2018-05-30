@@ -20,11 +20,19 @@ const FavouriteButton = ({actions = {}, favourites = {}, id}) => {
             favorite
         </i>
     )
+FavouriteButton.propTypes = {
+  actions: PropTypes.object,
+  favourites: PropTypes.object,
+  id: PropTypes.string
 }
 
 const PlayButton = ({action}) => (
     <i onClick={action} className={`material-icons ${style.playIcon}`} >play_circle_filled</i>
 )
+
+PlayButton.propTypes = {
+  action: PropTypes.func
+}
 
 const Item = ({actions = {}, favourites, item, ...props}) => (
     <div className={style.card} role='list-item' onClick={(e) => actions.show(item)}>
@@ -46,6 +54,12 @@ const Item = ({actions = {}, favourites, item, ...props}) => (
         </div>
     </div>
 )
+
+Item.propTypes = {
+  actions: PropTypes.object,
+  favourites: PropTypes.object,
+  item: PropTypes.object
+}
 
 const checkIntersect = (cb) => (e) => {
   const [intersect] = e
@@ -70,6 +84,13 @@ const List = ({items, onStarve = () => {}, isFetching, failed, ...props}) => [
     ]}
   </div>
 ]
+
+List.propTypes = {
+  items: PropTypes.array,
+  onStarve: PropTypes.func,
+  isFetching: PropTypes.bool,
+  failed: PropTypes.bool
+}
 
 
 )
