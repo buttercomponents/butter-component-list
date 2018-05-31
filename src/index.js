@@ -132,8 +132,14 @@ class List extends React.PureComponent {
 List.propTypes = {
   items: PropTypes.array,
   onStarve: PropTypes.func,
-  isFetching: PropTypes.bool,
-  failed: PropTypes.bool
+  isFetching: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.object
+  ]),
+  failed: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.array
+  ])
 }
 
 class Test extends Component {
