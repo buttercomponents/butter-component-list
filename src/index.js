@@ -65,29 +65,37 @@ Item.propTypes = {
   item: PropTypes.object
 }
 
-const checkIntersect = (cb) => (e) => {
-  const [intersect] = e
-
-  if (!intersect.isIntersecting) {
-    cb(intersect)
+const Failed = ({failed}) => {
+  if (failed && failed.length) {
+    return (<p key='list-failed' className={style.failed}>
+      {`FAILED: ${JSON.stringify(failed, null, 4)}`}
+    </p>)
   }
+  return null
+}
+
+const ListItems = ({items = [], ...props}) => {
+  if (!items.length) {
+    return null
+  }
+
+  return items.map((item, i) => (
+    <Item key={i} item={item} {...props} />
+  ))
 }
 
 const List = ({items, onStarve = () => {}, isFetching, failed, ...props}) => [
-  (failed && failed.length)
-    ? <p key='list-failed' className={style.failed}>
-      {`FAILED: ${JSON.stringify(failed, null, 4)}`}
-    </p> : null,
-  <div key='list-main' className={`${style.container}`}>
-    {[
-      items.length ? items.map((item, i) => (
-        <Item key={i} item={item} {...props} />
-      )) : null,
-      isFetching ? <p key='list-loading'>Loading...</p> : null,
-      <IntersectionVisible onIntersect={checkIntersect(onStarve)} key='scroll-marker' />
-    ]}
-  </div>
 ]
+      <Failed failed={failed} />,
+      <div key='list-main' className={`${style.container}`}>
+        {[
+          <ListItems key={`list-items-${count}`} items={items} {...props} />,
+          isFetching ? <p key='list-loading'>Loading...</p> : null,
+          <IntersectionVisible
+            onIntersect={this.checkIntersect(onStarve)}
+            key={`scroll-marker-${page}`} />
+        ]}
+      </div>
 
 List.propTypes = {
   items: PropTypes.array,
