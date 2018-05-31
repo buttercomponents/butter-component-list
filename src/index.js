@@ -84,8 +84,37 @@ const ListItems = ({items = [], ...props}) => {
   ))
 }
 
-const List = ({items, onStarve = () => {}, isFetching, failed, ...props}) => [
-]
+class List extends React.PureComponent {
+  constructor (props) {
+    super(props)
+    this.state = {
+      page: 0
+    }
+
+    this.checkIntersect = (cb) => (e) => {
+      const [entry] = e
+
+      if (entry.intersectionRatio) {
+        cb(entry, this.state.page + 1)
+      }
+    }
+  }
+
+  componentDidUpdate (prevProps, prevState) {
+    if (prevProps.items.length < this.props.items.length) {
+      this.setState(state => ({
+        page: state.page + 1
+      }))
+    }
+  }
+
+  render () {
+    const {items, onStarve = () => {}, isFetching, failed, ...props} = this.props
+    const {page} = this.state
+
+    const count = items.length
+
+    return [
       <Failed failed={failed} />,
       <div key='list-main' className={`${style.container}`}>
         {[
@@ -96,6 +125,9 @@ const List = ({items, onStarve = () => {}, isFetching, failed, ...props}) => [
             key={`scroll-marker-${page}`} />
         ]}
       </div>
+    ]
+  }
+}
 
 List.propTypes = {
   items: PropTypes.array,
