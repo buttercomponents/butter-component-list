@@ -146,24 +146,34 @@ class Test extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      items: props.items,
-      iteration: 1
+      page: 0,
+      items: props.items
     }
 
-    this.onStarve = (e) => {
-      this.setState(state => ({
-        iteration: state.iteration + 1,
-        items: state.items.concat(this.props.items.map(item =>
-          Object.assign({}, item, {title: `${state.iteration} - ${item.title}`})))
-      }))
+    this.onStarve = (e, page) => {
+      console.error('starve', e)
+      this.setState(state => {
+        if (page > 10) {
+          return state
+        }
+
+        return {
+          page: page,
+          items: state.items.concat(this.props.items.map(item =>
+            Object.assign({}, item, {title: `${page} - ${item.title}`})))
+        }
+      })
     }
   }
 
   render () {
-    const {items} = this.state
+    const {items, page} = this.state
     console.error('render')
 
-    return (<List {...this.props} items={items} onStarve={this.onStarve} />)
+    return ([
+      <p style={{position: 'fixed'}}>page:<br />{page}</p>,
+      <List {...this.props} items={items} onStarve={this.onStarve} />
+    ])
   }
 }
 
