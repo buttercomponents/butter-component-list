@@ -36,6 +36,6 @@
   },
   "dependencies": {
     "butter-base-components": "buttercomponents/butter-base-components",
-    "react-intersection-visible": "^1.1.0"
+    "react-intersection-visible": "xaiki/react-intersection-visible"
   }
 }
