@@ -88,7 +88,7 @@ class List extends React.PureComponent {
   constructor (props) {
     super(props)
     this.state = {
-      page: 0
+      page: -1
     }
 
     this.checkIntersect = (cb) => (e) => {
