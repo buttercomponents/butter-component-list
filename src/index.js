@@ -115,7 +115,7 @@ class List extends React.PureComponent {
     const count = items.length
 
     return [
-      <Failed failed={failed} />,
+      <Failed key='list-failed' failed={failed} />,
       <div key='list-main' className={`${style.container}`}>
         {[
           <ListItems key={`list-items-${count}`} items={items} {...props} />,
