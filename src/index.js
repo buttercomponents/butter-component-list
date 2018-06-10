@@ -15,11 +15,11 @@ const FavouriteButton = ({actions = {}, favourites = {}, id}) => {
 
   return (
     <i className={`material-icons ${style.favIcon} ${active ? 'active' : ''}`}
-      onClick={(e) => {
-        stopBubbles(e)
-        active ? actions.remove(id) : actions.add(id)
-      }}>
-            favorite
+       onClick={(e) => {
+           stopBubbles(e)
+           actions.toggle(id)
+       }}>
+        favorite
     </i>
   )
 }
@@ -38,7 +38,7 @@ PlayButton.propTypes = {
   action: PropTypes.func
 }
 
-const Item = ({actions = {}, favourites, item, ...props}) => (
+const Item = ({actions = {}, markers = {}, item, ...props}) => (
   <div className={style.card} role='list-item' onClick={(e) => actions.show(item)}>
     <div className={style.thumb} style={{backgroundImage: `url(${item.poster})`}}>
       <div className={`${style.overlay}`}>
@@ -47,7 +47,7 @@ const Item = ({actions = {}, favourites, item, ...props}) => (
           actions.play(item)
         }} />
       </div>
-      <FavouriteButton actions={actions.favourites} favourites={favourites} id={item.id} />
+      <FavouriteButton actions={actions.favourites} favourites={markers.favourites} id={item.id} />
     </div>
     <div className={`${style.itemTitle}`}>{item.title}</div>
     <div className={`${style.hoverContainer}`}>
@@ -61,7 +61,7 @@ const Item = ({actions = {}, favourites, item, ...props}) => (
 
 Item.propTypes = {
   actions: PropTypes.object,
-  favourites: PropTypes.object,
+  markers: PropTypes.object,
   item: PropTypes.object
 }
 
