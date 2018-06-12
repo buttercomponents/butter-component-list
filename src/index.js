@@ -15,10 +15,10 @@ const FavouriteButton = ({actions = {}, favourites = {}, id}) => {
 
   return (
     <i className={`material-icons ${style.favIcon} ${active ? 'active' : ''}`}
-       onClick={(e) => {
-           stopBubbles(e)
-           actions.toggle(id)
-       }}>
+      onClick={(e) => {
+        stopBubbles(e)
+        actions.toggle(id)
+      }}>
         favorite
     </i>
   )
