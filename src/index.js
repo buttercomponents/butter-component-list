@@ -5,6 +5,9 @@ import {Stars} from 'butter-base-components'
 import PropTypes from 'prop-types'
 import style from './style.styl'
 
+import PlayCircle from './icons/play-circle.svg'
+import Heart from './icons/heart.svg'
+
 const stopBubbles = (e) => {
   e.preventDefault()
   e.stopPropagation()
@@ -14,13 +17,11 @@ const FavouriteButton = ({actions = {}, favourites = {}, id}) => {
   const active = favourites[id]
 
   return (
-    <i className={`material-icons ${style.favIcon} ${active ? 'active' : ''}`}
+    <Heart className={`${style.favIcon} ${active ? 'active' : ''}`}
       onClick={(e) => {
         stopBubbles(e)
         actions.toggle(id)
-      }}>
-        favorite
-    </i>
+      }} />
   )
 }
 
@@ -31,7 +32,7 @@ FavouriteButton.propTypes = {
 }
 
 const PlayButton = ({action}) => (
-  <i onClick={action} className={`material-icons ${style.playIcon}`} >play_circle_filled</i>
+  <PlayCircle onClick={action} className={style.playIcon} />
 )
 
 PlayButton.propTypes = {
