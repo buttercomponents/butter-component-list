@@ -38,14 +38,14 @@ PlayButton.propTypes = {
   action: PropTypes.func
 }
 
-const Item = ({actions = {}, markers = {}, item, ...props}) => (
+const Item = ({actions, markers, item, itemShowPlay, ...props}) => (
   <div className={style.card} role='list-item' onClick={(e) => actions.show(item)}>
     <div className={style.thumb} style={{backgroundImage: `url(${item.poster})`}}>
       <div className={`${style.overlay}`}>
-        <PlayButton action={(e) => {
+        {itemShowPlay ? <PlayButton action={(e) => {
           stopBubbles(e)
           actions.play(item)
-        }} />
+        }} /> : null}
       </div>
       <FavouriteButton actions={actions.favourites} favourites={markers.favourites} id={item.id} />
     </div>
@@ -59,10 +59,18 @@ const Item = ({actions = {}, markers = {}, item, ...props}) => (
   </div>
 )
 
+Item.defaultProps = {
+  actions: {},
+  markers: {},
+  item: {},
+  itemShowPlay: true
+}
+
 Item.propTypes = {
   actions: PropTypes.object,
   markers: PropTypes.object,
-  item: PropTypes.object
+  item: PropTypes.object,
+  itemShowPlay: PropTypes.bool
 }
 
 const Failed = ({failed}) => {
