@@ -96,7 +96,7 @@ const ListItems = ({items = [], itemType, ...props}) => {
   }
 
   return items.map((item, i) => (
-    <Item key={i} item={item} role={`list-item-${itemType}`} {...props} />
+    <Item key={i} item={item} type={itemType} {...props} />
   ))
 }
 
