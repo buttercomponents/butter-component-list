@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 import style from './style.styl'
 
 import PlayCircle from './icons/play-circle.svg'
+import Info from './icons/information-variant.svg'
 import Heart from './icons/heart.svg'
 
 const stopBubbles = (e) => {
@@ -35,6 +36,10 @@ const PlayButton = ({action}) => (
   <PlayCircle onClick={action} className={style.playIcon} />
 )
 
+const InfoButton = () => (
+  <Info className={style.playIcon} />
+)
+
 PlayButton.propTypes = {
   action: PropTypes.func
 }
@@ -46,7 +51,7 @@ const Item = ({actions, markers, item, itemShowPlay, ...props}) => (
         {itemShowPlay ? <PlayButton action={(e) => {
           stopBubbles(e)
           actions.play(item)
-        }} /> : null}
+        }} /> : <InfoButton />}
       </div>
       <FavouriteButton actions={actions.favourites} favourites={markers.favourites} id={item.id} />
     </div>
