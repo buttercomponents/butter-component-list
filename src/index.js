@@ -44,8 +44,8 @@ PlayButton.propTypes = {
   action: PropTypes.func
 }
 
-const Item = ({actions, markers, item, itemShowPlay, ...props}) => (
-  <div className={style.card} role='list-item' onClick={(e) => actions.show(item)}>
+const Item = ({actions, markers, item, itemShowPlay, type, ...props}) => (
+  <div className={style.card} role={type} onClick={(e) => actions.show(item)}>
     <div className={style.thumb} style={{backgroundImage: `url(${item.poster})`}}>
       <div className={`${style.overlay}`}>
         {itemShowPlay ? <PlayButton action={(e) => {
@@ -69,14 +69,16 @@ Item.defaultProps = {
   actions: {},
   markers: {},
   item: {},
-  itemShowPlay: true
+  itemShowPlay: true,
+  type: 'list-item'
 }
 
 Item.propTypes = {
   actions: PropTypes.object,
   markers: PropTypes.object,
   item: PropTypes.object,
-  itemShowPlay: PropTypes.bool
+  itemShowPlay: PropTypes.bool,
+  type: PropTypes.string
 }
 
 const Failed = ({failed}) => {
@@ -88,13 +90,13 @@ const Failed = ({failed}) => {
   return null
 }
 
-const ListItems = ({items = [], ...props}) => {
+const ListItems = ({items = [], itemType, ...props}) => {
   if (!items.length) {
     return null
   }
 
   return items.map((item, i) => (
-    <Item key={i} item={item} {...props} />
+    <Item key={i} item={item} role={`list-item-${itemType}`} {...props} />
   ))
 }
 
@@ -123,14 +125,14 @@ class List extends React.PureComponent {
   }
 
   render () {
-    const {items, onStarve = () => {}, isFetching, failed, ...props} = this.props
+    const {items, type, onStarve = () => {}, isFetching, failed, ...props} = this.props
     const {page} = this.state
 
     const count = items.length
 
     return [
       <Failed key='list-failed' failed={failed} />,
-      <div key='list-main' className={`${style.container}`}>
+      <div key='list-main' role={type} className={`${style.container}`}>
         {[
           <ListItems key={`list-items-${count}`} items={items} {...props} />,
           isFetching ? <p key='list-loading'>Loading...</p> : null,
@@ -145,6 +147,7 @@ class List extends React.PureComponent {
 
 List.propTypes = {
   items: PropTypes.array,
+  type: PropTypes.string,
   onStarve: PropTypes.func,
   isFetching: PropTypes.oneOfType([
     PropTypes.bool,
@@ -154,6 +157,12 @@ List.propTypes = {
     PropTypes.bool,
     PropTypes.array
   ])
+}
+
+List.defaultProps = {
+  items: [],
+  type: 'list',
+  failed: false
 }
 
 class Test extends Component {
