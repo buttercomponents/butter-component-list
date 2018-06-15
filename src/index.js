@@ -44,8 +44,13 @@ PlayButton.propTypes = {
   action: PropTypes.func
 }
 
-const Item = ({actions, markers, item, itemShowPlay, type, ...props}) => (
-  <div className={style.card} role={type} onClick={(e) => actions.show(item)}>
+const Item = ({actions, markers, item, itemShowPlay, itemWidth, itemHeight, type, ...props}) => (
+  <div className={style.card} role={type}
+    style={{
+      width: itemWidth,
+      height: itemHeight
+    }}
+    onClick={(e) => actions.show(item)}>
     <div className={style.thumb} style={{backgroundImage: `url(${item.poster})`}}>
       <div className={`${style.overlay}`}>
         {itemShowPlay ? <PlayButton action={(e) => {
@@ -70,6 +75,8 @@ Item.defaultProps = {
   markers: {},
   item: {},
   itemShowPlay: true,
+  itemHeight: '15rem',
+  itemWidth: '15rem',
   type: 'list-item'
 }
 
@@ -78,6 +85,8 @@ Item.propTypes = {
   markers: PropTypes.object,
   item: PropTypes.object,
   itemShowPlay: PropTypes.bool,
+  itemWidth: PropTypes.string,
+  itemHeight: PropTypes.string,
   type: PropTypes.string
 }
 
@@ -127,12 +136,16 @@ class List extends React.PureComponent {
   render () {
     const {items, type, onStarve = () => {}, isFetching, failed, ...props} = this.props
     const {page} = this.state
+    const {itemWidth} = this.props
 
     const count = items.length
 
     return [
       <Failed key='list-failed' failed={failed} />,
-      <div key='list-main' role={type} className={`${style.container}`}>
+      <div key='list-main' role={type} className={`${style.container}`}
+        style={{
+          gridTemplateColumns: `repeat(auto-fit, minmax(${itemWidth}, 1fr))`
+        }}>
         {[
           <ListItems key={`list-items-${count}`} items={items} {...props} />,
           isFetching ? <p key='list-loading'>Loading...</p> : null,
@@ -162,7 +175,9 @@ List.propTypes = {
 List.defaultProps = {
   items: [],
   type: 'list',
-  failed: false
+  failed: false,
+  itemWidth: '15rem',
+  itemHeight: '15rem'
 }
 
 class Test extends Component {
